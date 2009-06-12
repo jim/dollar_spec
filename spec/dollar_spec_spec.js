@@ -28,6 +28,14 @@ $spec.describe('expectations', function(spec) {
         should.beTrue(true, 'was not true');
     });
 
+    spec.it('tests for an array', function(should) {
+        should.beArray([], 'was not an array');
+    });
+    
+    spec.it('tests for an instance', function(should) {
+        should.beInstanceOf(Array, [], 'was not an instance of array');
+    });
+
     spec.it('test for changing the value of a block', function(should) {
         var weapon = 'Hammer of Gruumsh';
         should.change(function() {
@@ -50,7 +58,22 @@ $spec.describe('expectations', function(spec) {
         var opponent = 'Blue dragon';
         should.beEqual('Blue dragon', opponent);
         should.beEqual(11, opponent.length);
-    }); 
+    });
+    
+    spec.it('tests for raised errors', function(should) {
+        should.raiseError(function() {
+          doesnt.exist();
+        });
+    });
+    
+    spec.it('tests for specific errors using a callback', function(should) {
+        should.raiseError(function() {
+          doesnt.exist();
+        }, function(e) {
+          should.beEqual('ReferenceError', e.name);
+        });
+    });
+    
 });
 
 $spec.describe('before and after callbacks', function(spec) {

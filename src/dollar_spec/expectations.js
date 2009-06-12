@@ -30,6 +30,23 @@ $spec.add('notBeEqual', function(expected, actual, message) {
     }
 });
 
+$spec.add('beInstanceOf', function(expected, object, message) {
+    var pass = object instanceof expected;
+    if (pass) {
+        this.result(true);
+    } else {
+        this.result(false, "Expected an array, but was " + typeof(object));
+    }
+});
+
+$spec.add('beArray', function(object, message) {
+    if (object instanceof(Array)) {
+        this.result(true);
+    } else {
+        this.result(false, "Expected an array, but was " + typeof(object));
+    }
+});
+
 $spec.add('beNull', function(actual, message) {
     if (null === actual) {
         this.result(true);
@@ -77,3 +94,15 @@ $spec.add('changeBy', function(amount, value, callback, message) {
     }
 });
 
+$spec.add('raiseError', function(method, verify) {
+    var should = this;
+    verify = verify || function(e) { 
+      should.beInstanceOf(Error, e);
+    };
+    try {
+      method();
+      this.result(false, 'did not raise an error');
+    } catch(e) {
+      verify(e);
+    }
+});
