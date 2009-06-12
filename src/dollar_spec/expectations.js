@@ -1,5 +1,5 @@
 $spec.add('beSame', function(expected, actual, message) {
-    if (expected == actual) {
+    if (expected === actual) {
         this.result(true);
     } else {
         this.result(false, "Expected " + expected.toString() + " to be the same as " + actual.toString());
@@ -7,7 +7,7 @@ $spec.add('beSame', function(expected, actual, message) {
 });
 
 $spec.add('notBeSame', function(expected, actual, message) {
-    if (expected == actual) {
+    if (expected === actual) {
         this.result(true);
     } else {
         this.result(false, "Expected " + expected.toString() + " to not be the same as " + actual.toString());

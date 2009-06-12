@@ -53,7 +53,7 @@ DollarSpec's expectations follow a simple convention- expectations are just func
 This is how the <code>beEqual</code> expectation is implemented:
 
     $spec.add('beSame', function(expected, actual, message) {
-        if (expected == actual) {
+        if (expected === actual) {
             this.result(true);
         } else {
             this.result(false, "Expected " + expected.toString() + " to be the same as " + actual.toString());
@@ -76,4 +76,4 @@ You should probably take a look at [ScrewUnit](http://github.com/nathansobo/scre
 
 ## Feedback
 
-Thoughts and feedback are welcomes and encouraged.
+Thoughts and feedback are welcomed and encouraged.
