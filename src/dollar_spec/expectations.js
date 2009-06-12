@@ -97,12 +97,30 @@ $spec.add('changeBy', function(amount, value, callback, message) {
 $spec.add('raiseError', function(method, verify) {
     var should = this;
     verify = verify || function(e) { 
-      should.beInstanceOf(Error, e);
+        should.beInstanceOf(Error, e);
     };
     try {
-      method();
-      this.result(false, 'did not raise an error');
+        method();
+        this.result(false, 'did not raise an error');
     } catch(e) {
-      verify(e);
+        verify(e);
+    }
+});
+
+$spec.add('satisfy', function(method) {
+    var result = method();
+    if (result === true) {
+        this.result(true);
+    } else {
+        this.result(false, 'did not satisfy the block');
+    }
+});
+
+$spec.add('notSatisfy', function(method) {
+    var result = method();
+    if (result === false) {
+        this.result(true);
+    } else {
+        this.result(false, 'satisfied the block');
     }
 });
