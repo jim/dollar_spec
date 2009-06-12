@@ -5,8 +5,14 @@ $spec.Spec = function(specName, method, expectations) {
         var should = new $spec.Should(expectations);
         var temp = {};
         var result = method.call(temp, should);
-        data.success = should.success[0];
-        data.message = should.success[1];
+        
+        if (result === false) {
+            data.success = null;
+        } else {
+            var status = should.outcome();
+            data.success = status.success;
+            data.message = status.message;
+        }
     };
     this.run = run;
     

@@ -26,3 +26,27 @@ $spec.it('tests for false', function(should) {
 $spec.it('tests for true', function(should) {
     should.beTrue(true, 'was not true');
 });
+
+$spec.it('test for changing the value of a block', function(should) {
+    var weapon = 'Hammer of Gruumsh';
+    should.change(function() {
+        return weapon;
+    }, function() {
+        weapon = "Twinkle Sword of Drizzt Do'Urden";
+    }, 'did not change');
+});
+
+$spec.it('test for changing by a specific numeric value', function(should) {
+    var swordCount = 45;
+    should.changeBy(10, function() {
+        return swordCount;
+    }, function() {
+        swordCount = 55;
+    }, 'did not increase by ten');
+});
+
+$spec.it('accepts more than one should statement per block', function(should) {
+    var opponent = 'Blue dragon';
+    should.beEqual('Blue dragon', opponent);
+    should.beEqual(11, opponent.length);
+});

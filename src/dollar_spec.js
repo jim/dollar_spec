@@ -4,13 +4,13 @@
 var $spec = (function() {
     
     // public methods
-    var add, it, report, run, stats;
+    var add, expectations, it, report, reportToConsole, run, stats;
 
     // private methods
     var fail;
 
     // private properties
-    var expectations, specs, failed, passed, pending;
+    var specs, failed, passed, pending;
     
     passed = [];
     failed = [];
@@ -25,9 +25,10 @@ var $spec = (function() {
     run = function() {
         
         for (var i=0, l=specs.length; i < l; i++) {
-            var spec, name = specs[i][0], method = specs[i][1];
             
+            var spec, name = specs[i][0], method = specs[i][1];
             spec = new $spec.Spec(name, method, expectations);
+            
             try {
                 spec.run();
                 if (spec.success() === true) {
@@ -44,14 +45,35 @@ var $spec = (function() {
         }
         
         if ($spec.opts.console) {
-            console.debug(report());
+            console.debug(reportToConsole());
         }
     };
     
-    report = function() {
-        return "There were " + passed.length.toString() + ' passing, '
-                             + failed.length.toString() + ' failing, and '
-                             + pending.length.toString() + ' pending specs!';
+    report = function() {        
+        var response = {};
+        var build = function(collection, name, specs) {
+            response[name] = [];
+            for (var i=0,l=specs.length; i < l; i++) {
+                var spec = specs[i]
+                response[name].push({
+                    name: spec.name(),
+                    success: spec.success(),
+                    message: spec.message()
+                });
+            }
+        };
+        
+        build(response, 'passed', passed);
+        build(response, 'failed', failed);        
+        build(response, 'pending', pending);
+
+        return response;
+    };
+    
+    reportToConsole = function() {
+        return "There are " + passed.length.toString() + ' passing, '
+                            + failed.length.toString() + ' failing, and '
+                            + pending.length.toString() + ' pending specs!';
     };
     
     add = function(name, method) {
@@ -90,6 +112,7 @@ var $spec = (function() {
         it: it,
         run: run,
         report: report,
+        reportToConsole: reportToConsole,
         expectations: expectations,
         stats: stats
     };
