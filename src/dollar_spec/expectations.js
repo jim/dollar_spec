@@ -73,6 +73,7 @@ $spec.add('changeBy', function(amount, value, callback, message) {
     if ((originalValue + amount) == newValue) {
         this.result(true);
     } else {
-        this.retsult(false, 'Expected ' + originalValue + ' to change by ' + amount.toString() + ', but it was ' + newValue.toString());
+        this.result(false, 'Expected ' + originalValue + ' to change by ' + amount.toString() + ', but it was ' + newValue.toString());
     }
 });
+

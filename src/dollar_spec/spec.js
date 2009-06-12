@@ -8,6 +8,8 @@ $spec.Spec = function(specName, method, expectations) {
         
         if (result === false) {
             data.success = null;
+        } else if (result === true) {
+            data.success = undefined;
         } else {
             var status = should.outcome();
             data.success = status.success;
@@ -37,3 +39,4 @@ $spec.Spec = function(specName, method, expectations) {
     };
     this.recover = recover;
 };
+

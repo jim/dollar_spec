@@ -2,33 +2,77 @@
 //  JavaScript testing with minimal syntax
 
 var $spec = (function() {
-    
+
     // public methods
-    var add, expectations, it, report, reportToConsole, run, stats;
+    var add, expectations, describe, it, report, reportToConsole, run, stats;
 
     // private methods
-    var fail;
+    var pass, pend, fail;
 
     // private properties
-    var specs, failed, passed, pending;
+    var specs, failed, passed, pending, runners;
     
     passed = [];
     failed = [];
     pending = [];
     expectations = [];
+    runners = [];
     specs = [];
     
-    it = function(name, method) {
-        specs.push([name, method]);
+    var Runner = function(namespaces, befores, afters) {
+                
+        // public methods
+        var before, after, it, describe;
+
+        // private properties
+        var befores, afters;
+
+        befores = [];
+        afters = [];
+        
+        before = function(callback) { befores.push(callback) };
+        this.before = before;
+
+        after = function(callback) { afters.push(callback) };
+        this.after = after;
+
+        it = function(name, method) {
+            var completeName = namespaces.join(' ') + ' ' + name;
+            specs.push([completeName, method, befores, afters]);
+        };
+        this.it = it;
+        
+        describe = function(namespace, callback) {
+            var newNamespaces = namespaces.slice(0);
+            newNamespaces.push(namespace);
+            var newBefores = befores.slice(0);
+            var newAfters = afters.slice(0);
+            var runner = new Runner(newNamespaces, newBefores, newAfters);
+            callback.call({}, runner);
+        };
+        this.describe = describe;
+    };    
+    
+    describe = function(namespace, callback) {
+        var runner = new Runner([namespace], [], []);
+        callback.call({}, runner);
     };
     
     run = function() {
         
+        var execute = function(methods) {
+            for (var i=0,l=methods.length; i<l; i++) {
+                methods[i].call({});
+            }
+        };
+        
         for (var i=0, l=specs.length; i < l; i++) {
             
             var spec, name = specs[i][0], method = specs[i][1];
+            var befores = specs[i][2], afters = specs[i][3];
             spec = new $spec.Spec(name, method, expectations);
             
+            execute(befores);
             try {
                 spec.run();
                 if (spec.success() === true) {
@@ -42,6 +86,7 @@ var $spec = (function() {
                 spec.recover(e);
                 fail(spec);
             }
+            execute(afters);
         }
         
         if ($spec.opts.console) {
@@ -109,6 +154,7 @@ var $spec = (function() {
     
     return {
         add: add,
+        describe: describe,
         it: it,
         run: run,
         report: report,

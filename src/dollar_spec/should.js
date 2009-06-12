@@ -22,3 +22,4 @@ $spec.Should = function(expectations) {
         this[expectations[i][0]] = expectations[i][1];
     }
 };
+
