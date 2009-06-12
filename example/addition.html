@@ -4,32 +4,33 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>Addition Spec</title>
-	<script src="../src/dollar_spec.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../src/dollar_spec/expectations.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../src/dollar_spec/spec.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../src/dollar_spec/should.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../dist/dollar_spec.js" type="text/javascript" charset="utf-8"></script>
 	<script src="addition.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	
-       $spec.opts.verbose = true;
+	    try {
+            $spec.opts.verbose = true;
 
-       $spec.run();
-       
-       var summary = function() {
-           var html = '', body = document.getElementById('summary');
-           var stats = $spec.stats();
-           
-           var types = ['passed', 'failed', 'pending'];
-           
-           for (var i=0, l = types.length; i < l; i++) {
-               var count = stats[types[i]];
-               if (count > 0) {
-                   html += '<h1 class="' + types[i] + '">' + count + ' ' + types[i] + '</h1>';
+            $spec.run();
+
+            var summarize = function() {
+               var html = '', summary = document.getElementById('summary');
+               var stats = $spec.stats();
+
+               var types = ['passed', 'failed', 'pending'];
+
+               for (var i=0, l = types.length; i < l; i++) {
+                   var count = stats[types[i]];
+                   if (count > 0) {
+                       html += '<h1 class="' + types[i] + '">' + count + ' ' + types[i] + '</h1>';
+                   }
                }
-           }
 
-           body.innerHTML = html;
-       };
+               summary.innerHTML = html;
+            };
+	    } catch(e) {
+	        
+	    }
 
 	</script>
 	<style type="text/css" media="screen">
@@ -49,8 +50,8 @@
 	</style>
 </head>
 
-<body onload='summary();'>
-    <div id="summary"></div>
-    <p>The specs are <a href="addition.js">here</a>. Code <a href="">on the hub</a>.</p>
+<body onload='summarize();'>
+    <div id="summary">It looks like you need to build the project. Run <code>../build</code> inside the project directory!</div>
+    <p>The specs are <a href="addition.js">here</a>. Code <a href="http://github.com/jim/dollar_spec/tree">on the hub</a>.</p>
 </body>
 </html>

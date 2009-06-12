@@ -7,14 +7,22 @@ Dollar spec is a tiny JavaScript spec framework that gets out of the way and let
 
 I wanted a small, pure-JS framework that supported a syntax I didn't have to think too much to use. I wanted to only add as much syntax as was neccessary, and leave the rest to JavaScript. I want to run JavaScript tests from the console; the HTML files currently being used are just a starting point.
 
-## Getting Started
+Also, I wanted minimal namespace usage. DollarSpec creates a single global entity, <code>$spec</code>.
 
-You'll probably want to build a 
+## Building the project
+
+You'll probably want to build a distributable file for any kind of real use. Inside the root directory, run:
+
+    ../build
+    
+And you'll have a brand spanking new file at dist/dollar_spec.js for use as you se fit.
+
+## Getting Started
 
 Here's a sample spec (you can see the complete example in example/addition.html):
 
     $spec.describe('my awesome addition function', function(spec) {
-
+        
         var add = function() {
            var total = 0;
            for (var i = 0, l = arguments.length; i < l; i++) {
@@ -23,25 +31,8 @@ Here's a sample spec (you can see the complete example in example/addition.html)
            return total;
         };
     
-        spec.before(function() {
-            // don't need to set anything up this time
-        });
-    
         spec.it('adds two numbers', function(should) {
             should.beEqual(4, add(2,2));
-        });
-
-        spec.it('adds three numbers', function(should) {
-            should.beEqual(4, add(2,1,1));
-        });
-
-        // to show a failing spec
-        spec.it('adds two numbers', function(should) {
-            should.beEqual(5, add(2,1));
-        });
-
-        // to show a pending spec
-        spec.it('casts and adds strings', function(should) {
         });
     });
     
@@ -55,11 +46,25 @@ If you run this inside Firefox, you will get some messages in the Firebug consol
     // Print a line to the console for each test (defaults to false)
     $spec.opts.verbose = true;
 
-I haven't gotten a packaging solution together yet, but you should be able to get something simple going by using spec/runner.html as a guide.
-
 ## Custom expectations
 
-DollarSpec's expectations follow a simple convention- expectations are just functions that call <code>this.result()</code> with a result value and an an optional message. The result value can be true, false, or null( for pending specs).
+DollarSpec's expectations follow a simple convention- expectations are just functions that call <code>this.result()</code> with a result value and an an optional message. The result value can be true, false, or null (for pending specs).
+
+This is how the <code>beEqual</code> expectation is implemented:
+
+    $spec.add('beSame', function(expected, actual, message) {
+        if (expected == actual) {
+            this.result(true);
+        } else {
+            this.result(false, "Expected " + expected.toString() + " to be the same as " + actual.toString());
+        }
+    });
+    
+You can expectations of your own by following this pattern.
+
+## API
+
+None yet, check out expectations for what is supported. Sorry!
 
 ## Inspiration
 
