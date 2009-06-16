@@ -52,7 +52,7 @@ DollarSpec's expectations follow a simple convention- expectations are just func
 
 This is how the <code>beEqual</code> expectation is implemented:
 
-    $spec.add('beSame', function(expected, actual, message) {
+    $spec.expectation('beSame', function(expected, actual, message) {
         if (expected === actual) {
             this.result(true);
         } else {

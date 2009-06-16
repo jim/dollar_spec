@@ -1,4 +1,4 @@
-$spec.add('beSame', function(expected, actual, message) {
+$spec.expectation('beSame', function(expected, actual, message) {
     if (expected === actual) {
         this.result(true);
     } else {
@@ -6,7 +6,7 @@ $spec.add('beSame', function(expected, actual, message) {
     }
 });
 
-$spec.add('notBeSame', function(expected, actual, message) {
+$spec.expectation('notBeSame', function(expected, actual, message) {
     if (expected === actual) {
         this.result(true);
     } else {
@@ -14,7 +14,7 @@ $spec.add('notBeSame', function(expected, actual, message) {
     }
 });
 
-$spec.add('beEqual', function(expected, actual, message) {
+$spec.expectation('beEqual', function(expected, actual, message) {
     if (expected == actual) {
         this.result(true);
     } else {
@@ -22,7 +22,7 @@ $spec.add('beEqual', function(expected, actual, message) {
     }
 });
 
-$spec.add('notBeEqual', function(expected, actual, message) {
+$spec.expectation('notBeEqual', function(expected, actual, message) {
     if (expected != actual) {
         this.result(true);
     } else {
@@ -30,7 +30,7 @@ $spec.add('notBeEqual', function(expected, actual, message) {
     }
 });
 
-$spec.add('beInstanceOf', function(expected, object, message) {
+$spec.expectation('beInstanceOf', function(expected, object, message) {
     var pass = object instanceof expected;
     if (pass) {
         this.result(true);
@@ -39,7 +39,7 @@ $spec.add('beInstanceOf', function(expected, object, message) {
     }
 });
 
-$spec.add('beArray', function(object, message) {
+$spec.expectation('beArray', function(object, message) {
     if (object instanceof(Array)) {
         this.result(true);
     } else {
@@ -47,7 +47,7 @@ $spec.add('beArray', function(object, message) {
     }
 });
 
-$spec.add('beNull', function(actual, message) {
+$spec.expectation('beNull', function(actual, message) {
     if (null === actual) {
         this.result(true);
     } else {
@@ -55,7 +55,7 @@ $spec.add('beNull', function(actual, message) {
     }
 });
 
-$spec.add('beFalse', function(actual, message) {
+$spec.expectation('beFalse', function(actual, message) {
     if (actual === false) {
         this.result(true);
     } else {
@@ -63,7 +63,7 @@ $spec.add('beFalse', function(actual, message) {
     }
 });
 
-$spec.add('beTrue', function(actual, message) {
+$spec.expectation('beTrue', function(actual, message) {
     if (actual === true) {
         this.result(true);
     } else {
@@ -71,7 +71,7 @@ $spec.add('beTrue', function(actual, message) {
     }
 });
 
-$spec.add('change', function(value, callback, message) {
+$spec.expectation('change', function(value, callback, message) {
     var originalValue = value();
     callback();
     var newValue = value();
@@ -83,7 +83,7 @@ $spec.add('change', function(value, callback, message) {
 });
 
 
-$spec.add('changeBy', function(amount, value, callback, message) {
+$spec.expectation('changeBy', function(amount, value, callback, message) {
     var originalValue = value();
     callback();
     var newValue = value();
@@ -94,7 +94,7 @@ $spec.add('changeBy', function(amount, value, callback, message) {
     }
 });
 
-$spec.add('raiseError', function(method, verify) {
+$spec.expectation('raiseError', function(method, verify) {
     var should = this;
     verify = verify || function(e) { 
         should.beInstanceOf(Error, e);
@@ -107,7 +107,7 @@ $spec.add('raiseError', function(method, verify) {
     }
 });
 
-$spec.add('satisfy', function(method) {
+$spec.expectation('satisfy', function(method) {
     var result = method();
     if (result === true) {
         this.result(true);
@@ -116,7 +116,7 @@ $spec.add('satisfy', function(method) {
     }
 });
 
-$spec.add('notSatisfy', function(method) {
+$spec.expectation('notSatisfy', function(method) {
     var result = method();
     if (result === false) {
         this.result(true);

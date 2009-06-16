@@ -4,7 +4,7 @@
 var $spec = (function() {
 
     // public methods
-    var add, expectations, describe, it, report, reportToConsole, run, stats;
+    var expectation, expectations, describe, it, report, reportToConsole, run, stats;
 
     // private methods
     var pass, pend, fail;
@@ -121,7 +121,7 @@ var $spec = (function() {
                             + pending.length.toString() + ' pending specs!';
     };
     
-    add = function(name, method) {
+    expectation = function(name, method) {
         expectations.push([name, method]);
     };
     
@@ -153,7 +153,7 @@ var $spec = (function() {
     };
     
     return {
-        add: add,
+        expectation: expectation,
         describe: describe,
         it: it,
         run: run,
