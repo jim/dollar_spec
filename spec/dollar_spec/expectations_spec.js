@@ -1,6 +1,6 @@
 $spec.describe('expectations', function(spec) {
     spec.it('tests for equality using booleans', function(should) {
-        should.beEqual(true, not.here(), 'did not match');
+        should.beEqual(true, true, 'did not match');
     });
 
     spec.it('tests for inequality using booleans', function(should) {
