@@ -18,6 +18,8 @@
 
        $spec.run();
        
+       console.log($spec.stats());
+       
        var summary = function() {
            var html = '', body = document.getElementById('summary');
            var stats = $spec.stats();

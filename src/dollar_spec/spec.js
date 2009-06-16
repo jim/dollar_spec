@@ -1,6 +1,8 @@
-$spec.Spec = function(specName, method, expectations) {
+$spec.Spec = function(name, method, expectations) {
     var data = {};
-    
+
+    data.name = name;
+        
     var run = function() {
         var should = new $spec.Should(expectations);
         var temp = {};
@@ -18,25 +20,30 @@ $spec.Spec = function(specName, method, expectations) {
     };
     this.run = run;
     
-    var success = function() {
+    this.success = function() {
         return data.success;
     };
-    this.success = success;
 
-    var message = function() {
+    this.message = function() {
         return data.message;
     };
-    this.message = message;
     
-    var name = function() {
-        return specName;
+    this.name = function() {
+        return data.name;
     };
-    this.name = name;
     
-    var recover = function(exception) {
-        data.success = false;
-        data.message = exception.message;
+    this.data = function() {
+      return data;
     };
-    this.recover = recover;
+    
+    this.recover = function(exception) {
+      data.success = false;
+      data.errorName = exception.name;
+      data.message = exception.message || exception.message;
+      data.fileName = exception.fileName;
+      data.lineNumber = exception.lineNumber;
+      data.stack = exception.stack;
+    };
+
 };
 

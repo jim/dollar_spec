@@ -146,10 +146,19 @@ var $spec = (function() {
         }
     };
     
+    map = function(array) {
+      var result = [];
+      for (var i=0,l=array.length; i<l; i++) {
+        var spec = array[i];
+        result.push(spec.data());
+      }
+      return result;
+    };
+    
     stats = function() {
-        return { passed: passed.length,
-                 failed: failed.length,
-                 pending: pending.length };
+        return { passed: map(passed),
+                 failed: map(failed),
+                 pending: map(pending) };
     };
     
     return {
