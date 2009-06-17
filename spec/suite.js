@@ -4,12 +4,12 @@ function color(command, text) {
   return "\033[" + command + "m" + text + "\033[0m";
 }
 
-
 function onLoad() {
     
   new diligence.Server(function(setup) {
     // setup.debug = true;
     setup.publicPath = 'diligence/public';
+    setup.runnerPath = 'runner.html';
     setup.testPaths = [
       '../src/dollar_spec.js',
       '../src/dollar_spec/expectations.js',
@@ -19,11 +19,13 @@ function onLoad() {
       'dollar_spec/expectations_spec.js',
       'dollar_spec/should_spec.js',
       'dollar_spec/spec_spec.js',
-      'boot.js'
+      'respond.js'
     ];
-    setup.collectPath ='collect.js',
-    setup.process = function(req, results) {
-            
+    setup.process = function(browser, results) {
+      
+      puts('');
+      puts(browser.name);
+        
       if (results.failed.length > 0) {
         puts(color('31', results.failed.length.toString() + ' failures:'));
         for(var i=0,l=results.failed.length; i<l; i++) {

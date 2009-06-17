@@ -5,7 +5,7 @@ Dollar spec is a tiny JavaScript spec framework that gets out of the way and let
 
 ## Why another JavaScript spec framework?
 
-I wanted a small, pure-JS framework that supported a syntax I didn't have to think too much to use. I wanted to only add as much syntax as was neccessary, and leave the rest to JavaScript. I want to run JavaScript tests from the console; the HTML files currently being used are just a starting point.
+I wanted a small, pure-JS framework that supported a syntax I didn't have to think too much to use. I wanted to only add as much syntax as was neccessary, and leave the rest to JavaScript. I want to run JavaScript tests from the console.
 
 Also, I wanted minimal namespace usage. DollarSpec creates a single global entity, <code>$spec</code>.
 
@@ -54,13 +54,22 @@ This is how the <code>beEqual</code> expectation is implemented:
 
     $spec.expectation('beSame', function(expected, actual, message) {
         if (expected === actual) {
-            this.result(true);
+            this.pass();
         } else {
-            this.result(false, "Expected " + expected.toString() + " to be the same as " + actual.toString());
+            this.fail("Expected " + expected.toString() + " to be the same as " + actual.toString());
         }
     });
     
 You can expectations of your own by following this pattern.
+
+## Running the test suite
+
+The project's specs use [diligence](http://github.com/jim/diligence), a small JavaScript remote test runner. A copy is included with the project, but you will need a working installation of [Node](http://tinyclouds.org/node/). To run the tests, run these commands from inside the project directory:
+
+    cd spec
+    node suite.js
+    
+And then point your browser to localhost:5678. You should see '23 passed' in the browser, and something similar in the the console.
 
 ## API
 

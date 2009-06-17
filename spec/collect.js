@@ -1,3 +1,0 @@
-(function() {
-  return $spec.stats();
-})();

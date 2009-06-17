@@ -4,6 +4,16 @@ $spec.Should = function(expectations) {
         results.push([success, message]);
     };
     
+    this.pass = function() {
+        this.result(true);
+    };
+    
+    this.fail = function(message) {
+      var error = new Error(message);
+      error.name = 'ExpectationFailure';
+      throw error;
+    };
+    
     this.outcome = function() {
         if (results.length == 0) {
             return {success: null};

@@ -1,8 +1,8 @@
 $spec.expectation('beSame', function(expected, actual, message) {
     if (expected === actual) {
-        this.result(true);
+        this.pass();
     } else {
-        this.result(false, "Expected " + expected.toString() + " to be the same as " + actual.toString());
+        this.fail("Expected " + expected.toString() + " to be the same as " + actual.toString());
     }
 });
 
