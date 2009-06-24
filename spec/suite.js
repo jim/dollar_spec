@@ -12,12 +12,11 @@ function onLoad() {
     setup.runnerPath = 'runner.html';
     setup.testPaths = [
       '../src/dollar_spec.js',
-      '../src/dollar_spec/expectations.js',
-      '../src/dollar_spec/should.js',
+      '../src/dollar_spec/verbs.js',
+      '../src/dollar_spec/matchers.js',
       '../src/dollar_spec/spec.js',
       'dollar_spec_spec.js',
-      'dollar_spec/expectations_spec.js',
-      'dollar_spec/should_spec.js',
+      'dollar_spec/matchers_spec.js',
       'dollar_spec/spec_spec.js',
       'respond.js'
     ];

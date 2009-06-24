@@ -1,13 +1,13 @@
 $spec.describe('Spec', function(spec) {
-    spec.it('will treat a callback that returns false as pending', function(should) {
+    spec.it('will treat a callback that returns false as pending', function(expect) {
         var number = 4;
-        var spec = new $spec.Spec('test pending', function(should) {
-            should.beEqual(5, number);
+        var spec = new $spec.Spec('test pending', function(expect) {
+            expect(number).to.equal(5);
             return false;
-        }, $spec.expectations);
+        });
 
         spec.run();
 
-        should.beNull(spec.success());
+        expect(spec.success()).to.be(null);
     }); 
 });

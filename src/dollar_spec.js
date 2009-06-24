@@ -4,7 +4,7 @@
 var $spec = (function() {
 
     // public methods
-    var expectation, expectations, describe, it, report, reportToConsole, run, stats;
+    var matcher, matchers, verbs, describe, it, report, reportToConsole, run, stats;
 
     // private methods
     var pass, pend, fail;
@@ -15,7 +15,8 @@ var $spec = (function() {
     passed = [];
     failed = [];
     pending = [];
-    expectations = [];
+    matchers = {};
+    verbs = [];
     runners = [];
     specs = [];
     
@@ -70,7 +71,7 @@ var $spec = (function() {
             
             var spec, name = specs[i][0], method = specs[i][1];
             var befores = specs[i][2], afters = specs[i][3];
-            spec = new $spec.Spec(name, method, expectations);
+            spec = new $spec.Spec(name, method);
             
             execute(befores);
             try {
@@ -121,8 +122,12 @@ var $spec = (function() {
                             + pending.length.toString() + ' pending specs!';
     };
     
-    expectation = function(name, method) {
-        expectations.push([name, method]);
+    matcher = function(name, method) {
+      matchers[name] = method;
+    };
+    
+    verb = function(name, method) {
+      verbs.push([name, method]);
     };
     
     pass = function(spec) {
@@ -162,13 +167,15 @@ var $spec = (function() {
     };
     
     return {
-        expectation: expectation,
+        matcher: matcher,
+        verb: verb,
+        verbs: verbs,
         describe: describe,
         it: it,
         run: run,
         report: report,
         reportToConsole: reportToConsole,
-        expectations: expectations,
+        matchers: matchers,
         stats: stats
     };
 
