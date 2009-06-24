@@ -5,4 +5,4 @@ then
     mkdir dist
 fi
 
-cat src/dollar_spec.js src/dollar_spec/expectations.js src/dollar_spec/should.js src/dollar_spec/spec.js > dist/dollar_spec.js
+cat src/dollar_spec.js src/dollar_spec/matchers.js src/dollar_spec/verbs.js src/dollar_spec/spec.js > dist/dollar_spec.js
