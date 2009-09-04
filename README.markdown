@@ -1,7 +1,7 @@
 DollarSpec
 ==========
 
-Dollar spec is a tiny JavaScript spec framework that gets out of the way and lets you get things done. It supports nested describes and before/after filters, but that is about it. The standard set of expectations is small right now, but they are easy to add.
+Dollar spec is a tiny JavaScript spec framework that gets out of the way and lets you get things done. It supports nested describes and before/after blocks, but that is about it. The standard set of expectations is small right now, but they are easy to add.
 
 ## Why another JavaScript spec framework?
 
