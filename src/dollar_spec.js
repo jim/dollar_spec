@@ -39,6 +39,7 @@ var $spec = (function() {
 
         it = function(name, method) {
             var completeName = namespaces.join(' ') + ' ' + name;
+            method = method || function(expect){};
             specs.push([completeName, method, befores, afters]);
         };
         this.it = it;

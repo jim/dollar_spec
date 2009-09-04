@@ -12,20 +12,19 @@ $spec.describe('my awesome addition function', function(spec) {
         // don't need to set anything up this time
     });
     
-    spec.it('adds two numbers', function(should) {
-        should.beEqual(4, add(2,2));
+    spec.it('adds two numbers', function(expect) {
+        expect(add(2,2)).to.equal(4);
     });
 
-    spec.it('adds three numbers', function(should) {
-        should.beEqual(4, add(2,1,1));
+    spec.it('adds three numbers', function(expect) {
+        expect(add(1,1,2)).to.equal(4);
     });
 
     // to show a failing spec
-    spec.it('adds two numbers', function(should) {
-        should.beEqual(5, add(2,1));
+    spec.it('adds two numbers', function(expect) {
+        expect(add(1,1,2)).to.equal(5);
     });
 
     // to show a pending spec
-    spec.it('casts and adds strings', function(should) {
-    });
+    spec.it('casts and adds strings');
 });

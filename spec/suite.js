@@ -30,10 +30,16 @@ function onLoad() {
         for(var i=0,l=results.failed.length; i<l; i++) {
           puts('  *  ' + results.failed[i].name);
           puts('     ' + results.failed[i].errorName + ': ' + results.failed[i].message);
-          puts('     in line ' + results.failed[i].lineNumber + ' of ' + results.failed[i].fileName);
+          if (results.failed[i].fileName) {
+            var cleanedName = results.failed[i].fileName.replace('http://localhost:5678/files?path=', '').replace('%2F', '/');
+          } else {
+            var cleanedName = 'unknown';
+          }
+          
+          puts('     in line ' + results.failed[i].lineNumber + ' of ' + cleanedName);
           
           // need to do some stacktrace filtering
-          // puts('     ' + results.failed[i].stack);
+          puts('     ' + results.failed[i].stack);
         }
       }
       

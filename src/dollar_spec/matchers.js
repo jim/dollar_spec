@@ -22,8 +22,8 @@ $spec.matcher('equal', function(result) {
   
   var actual = typeof(this.actual) == 'function' ? this.actual() : this.actual;
   
-  result.failure = "Expected " + actual.toString() + " to be the same as " + this.expected.toString();
-  result.negatedFailure = "Expected " + actual.toString() + " to not be the same as " + this.expected.toString();
+  result.failure = "Expected " + actual.toString() + " to be equal to " + this.expected.toString();
+  result.negatedFailure = "Expected " + actual.toString() + " to not be equal to " + this.expected.toString();
   
   return this.expected == actual;
 });
