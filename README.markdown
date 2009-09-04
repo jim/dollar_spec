@@ -46,6 +46,8 @@ If you run this inside Firefox, you will get some messages in the Firebug consol
     // Print a line to the console for each test (defaults to false)
     $spec.opts.verbose = true;
 
+If you don't want to use the console reporting, the results of all specs are collected and returned by <code>$spec.stats()</code>. This makes it easy to do whatever you wish with the results.
+
 ## Custom expectations
 
 DollarSpec's expectations are built from two pieces- verbs and matchers.
