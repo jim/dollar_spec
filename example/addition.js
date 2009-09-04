@@ -9,7 +9,7 @@ $spec.describe('my awesome addition function', function(spec) {
     };
     
     spec.before(function() {
-        // don't need to set anything up this time
+        // code in this block is run before each spec
     });
     
     spec.it('adds two numbers', function(expect) {
