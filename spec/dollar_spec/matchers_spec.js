@@ -20,6 +20,7 @@ $spec.describe('expectations', function(spec) {
     
     spec.it('tests for undefined', function(expect) {
         expect(undefined).to.equal(undefined);
+        expect(undefined).to.beUndefined();
     });
     
     spec.it('tests for false', function(expect) {

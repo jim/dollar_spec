@@ -12,6 +12,13 @@ $spec.matcher('beNull', function(result) {
   return this.actual === null;
 });
 
+$spec.matcher('beUndefined', function(result) {
+  result.failure = "Expected undefined, but found " + String(this.actual);
+  result.negatedFailure = "Expected a defined value, but recieved undefined.";
+  
+  return typeof(this.actual) === 'undefined';
+});
+
 $spec.matcher('equal', function(result) {
   
   var stringName = function(value) {

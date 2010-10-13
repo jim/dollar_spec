@@ -20,6 +20,11 @@ $spec.verb('beNull', function() {
   return this;
 });
 
+$spec.verb('beUndefined', function() {
+  this.set('matcher', 'beUndefined');
+  return this;
+});
+
 $spec.verb('change', function(affected) {
   this.set('matcher', 'change');
   this.set('affected', affected);
