@@ -92,17 +92,21 @@ Keep in mind that any expectation can be negated using <code>not()</code>. For e
 
     expect(3).to.not().equal(8);
 
-### expect(actual).to.be(object)
+### expect(actual).to.equal(expected)
 
-Compares the expected and actual values using <code>===</code>.
+Compares <code>actual</code> and <code>expected</code> using <code>===</code>.
 
 ### expect(actual).to.beA(Object)
 
 Verifies that <code>actual</code> is an instance of <code>Object</code>.
 
-### expect(actual).to.equal(expected)
+### expect(actual).to.beUndefined()
 
-Compares <code>actual</code> and <code>expected</code> using <code>==</code>.
+Verifies that <code>actual</code> is undefined.
+
+### expect(actual).to.beNull()
+
+Verifies that <code>actual</code> is null.
 
 ### expect(affectorFunction).to.change(affectedFunction)
 
