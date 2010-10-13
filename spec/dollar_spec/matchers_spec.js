@@ -44,7 +44,8 @@ $spec.describe('expectations', function(spec) {
     spec.it('tests for an instance', function(expect) {
       expect([]).to.beA(Array);
       expect([]).to.beAn(Array);
-      expect('a  string!').to.not().beA(Array);      
+      expect('a  string!').to.not().beA(Array);
+      expect(null).to.not().beA(String);
     });
 
     spec.it('test for changing the value of a block', function(expect) {
