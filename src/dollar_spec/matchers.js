@@ -1,16 +1,3 @@
-$spec.matcher('be', function(result) {
-  
-  var actualName = this.actual == null ? 'null' : this.actual.toString();
-  var expectedName = this.expected == null ? 'null' : this.expected.toString();
-
-  result.failure = "Expected " + actualName + " to be the same as " + expectedName;
-  result.negatedFailure = "Expected " + actualName + " to not be the same as " + expectedName;
-
-  var actual = typeof(this.actual) == 'function' ? this.actual() : this.actual;
-  
-  return this.expected === actual;
-});
-
 $spec.matcher('beA', function(result) {
   result.failure = "Expected an instance of " + this.klass.toString() + ", but it was " + typeof(this.actual);
   result.negatedFailure = "Expected instance of a class other than " + this.klass.toString() + ", but it was one";
@@ -18,14 +5,25 @@ $spec.matcher('beA', function(result) {
   return this.actual instanceof(this.klass);
 });
 
+$spec.matcher('beNull', function(result) {
+  result.failure = "Expected null, but found " + String(this.actual);
+  result.negatedFailure = "Expected a non-null value, but recieved null.";
+  
+  return this.actual === null;
+});
+
 $spec.matcher('equal', function(result) {
   
-  var actual = typeof(this.actual) == 'function' ? this.actual() : this.actual;
+  var actual = typeof(this.actual) === 'function' ? this.actual() : this.actual;
+  var expected = this.expected === null ? 'null' : this.expected;
   
-  result.failure = "Expected " + actual.toString() + " to be equal to " + this.expected.toString();
-  result.negatedFailure = "Expected " + actual.toString() + " to not be equal to " + this.expected.toString();
+  var actualName = actual === null ? 'null' : actual;
+  
+  result.failure = "Expected " + actualName.toString() + " to be equal to " + expected.toString();
+  result.negatedFailure = "Expected " + actualName.toString() + " to not be equal to " + expected.toString();
   
   return this.expected == actual;
+
 });
 
 $spec.matcher('change', function(result) {

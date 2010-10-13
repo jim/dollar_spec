@@ -15,21 +15,14 @@ $spec.verb('equal', function(expected) {
   return this;
 });
 
-$spec.verb('beNull', function(expected) {
-  this.set('matcher', 'be');
-  this.set('expected', expected);
+$spec.verb('beNull', function() {
+  this.set('matcher', 'beNull');
   return this;
 });
 
 $spec.verb('change', function(affected) {
   this.set('matcher', 'change');
   this.set('affected', affected);
-  return this;
-});
-
-$spec.verb('be', function(expected) {
-  this.set('matcher', 'be');
-  this.set('expected', expected);
   return this;
 });
 

@@ -24,11 +24,11 @@ $spec.describe('before and after callbacks', function(spec) {
 
     spec.it('calls after after the first spec', function(expect) {
       zeroed = false;
-      expect(zeroed).to.be(false);
+      expect(zeroed).to.equal(false);
     });
 
     spec.it('calls after after the first spec', function(expect) {
-      expect(zeroed).to.be(true);
+      expect(zeroed).to.equal(true);
     });
   }); 
 });

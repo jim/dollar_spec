@@ -79,11 +79,12 @@ $spec.Spec = function(name, method) {
             data.errorName = 'FAIL';
             
             var line = e.stack[3];
-            var file = line.match(/.+\?path=(.+)$/)[1];
-            fileAndLine = file.split(':');
-            
-            data.line = fileAndLine[1];
-            data.file = fileAndLine[0].replace('%2F', '/');
+            var fileAndLine = line.match(/.+\?path=(.+)$/);
+            if (fileAndLine) {
+              parts = fileAndLine[1].split(':');
+              data.line = parts[1];
+              data.file = parts[0].replace('%2F', '/');              
+            }
             
             return;
           }

@@ -4,10 +4,10 @@
 var $spec = (function() {
 
     // public methods
-    var matcher, matchers, verbs, describe, it, report, reportToConsole, run, stats;
+    var matcher, matchers, verbs, describe, it, report, reportToConsole, run, stats, verb;
 
     // private methods
-    var pass, pend, fail;
+    var pass, pend, fail, map;
 
     // private properties
     var specs, failed, passed, pending, runners;

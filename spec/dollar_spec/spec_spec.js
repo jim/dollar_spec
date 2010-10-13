@@ -8,6 +8,6 @@ $spec.describe('Spec', function(spec) {
 
         spec.run();
 
-        expect(spec.success()).to.be(null);
+        expect(spec.success()).to.equal(null);
     }); 
 });

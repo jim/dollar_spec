@@ -6,20 +6,21 @@ $spec.describe('expectations', function(spec) {
 
     var a = {}, b = {};
     spec.it('tests for different objects', function(expect) {
-        expect(a).to.not().be(b);
+        expect(a).to.not().equal(b);
     });
     
     spec.it('tests for same object', function(expect) {
-        expect(a).to.be(a);
+        expect(a).to.equal(a);
     });
     
     spec.it('tests for null', function(expect) {
-        expect(null).to.be(null);
+        expect(null).to.equal(null);
+        expect(null).to.beNull();
     });
     
     spec.it('tests for false', function(expect) {
-        expect(false).to.be(false);
-        expect(true).to.not().be(false);
+        expect(false).to.equal(false);
+        expect(true).to.not().equal(false);
     });
     
     spec.it('test for changing by a specific numeric value', function(expect) {
@@ -32,7 +33,7 @@ $spec.describe('expectations', function(spec) {
     });
 
     spec.it('tests for true', function(expect) {
-      expect(true).to.be(true);
+      expect(true).to.equal(true);
     });
     
     spec.it('tests for an instance', function(expect) {
@@ -73,7 +74,7 @@ $spec.describe('expectations', function(spec) {
     spec.it('tests for satisfying a block with a specific object', function(expect) {
         expect(function() {
             return true;
-        }).to.be(true);
+        }).to.equal(true);
     });
     
     spec.it('tests for satisfying a block using equal', function(expect) {
@@ -85,6 +86,6 @@ $spec.describe('expectations', function(spec) {
     spec.it('tests for not satisfying a block', function(expect) {
         expect(function() {
             return false;
-        }).to.not().be(true);
+        }).to.not().equal(true);
     });
 });
