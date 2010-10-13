@@ -14,13 +14,23 @@ $spec.matcher('beNull', function(result) {
 
 $spec.matcher('equal', function(result) {
   
+  var stringName = function(value) {
+    if (value === null) {
+      return 'null';
+    } else if (typeof(value) === 'undefined') {
+      return 'undefined';
+    } else {
+      return value;
+    }
+  };
+  
   var actual = typeof(this.actual) === 'function' ? this.actual() : this.actual;
-  var expected = this.expected === null ? 'null' : this.expected;
+
+  var actualName = stringName(actual);
+  var expectedName = stringName(this.expected);
   
-  var actualName = actual === null ? 'null' : actual;
-  
-  result.failure = "Expected " + actualName.toString() + " to be equal to " + expected.toString();
-  result.negatedFailure = "Expected " + actualName.toString() + " to not be equal to " + expected.toString();
+  result.failure = "Expected " + actualName.toString() + " to be equal to " + expectedName.toString();
+  result.negatedFailure = "Expected " + actualName.toString() + " to not be equal to " + expectedName.toString();
   
   return this.expected == actual;
 

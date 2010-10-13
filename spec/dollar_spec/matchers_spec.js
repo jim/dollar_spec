@@ -18,6 +18,10 @@ $spec.describe('expectations', function(spec) {
         expect(null).to.beNull();
     });
     
+    spec.it('tests for undefined', function(expect) {
+        expect(undefined).to.equal(undefined);
+    });
+    
     spec.it('tests for false', function(expect) {
         expect(false).to.equal(false);
         expect(true).to.not().equal(false);
