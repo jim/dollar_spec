@@ -105,7 +105,8 @@ var $spec = (function() {
                 response[name].push({
                     name: spec.name(),
                     success: spec.success(),
-                    message: spec.message()
+                    message: spec.message(),
+                    stack: spec.stack()
                 });
             }
         };
@@ -128,7 +129,13 @@ var $spec = (function() {
     };
     
     verb = function(name, method) {
-      verbs.push([name, method]);
+      var withStacktrace = function() {
+        var result = method.apply(this, arguments);
+        this.set('stack', printStackTrace());
+        return result;
+      }
+      
+      verbs.push([name, withStacktrace]);
     };
     
     pass = function(spec) {

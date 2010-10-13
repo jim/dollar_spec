@@ -1,4 +1,4 @@
-// $spec.opts.console = false;
+$spec.opts.console = false;
 $spec.run();
 diligence.respond($spec.stats());
 

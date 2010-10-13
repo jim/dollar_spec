@@ -75,6 +75,16 @@ $spec.Spec = function(name, method) {
           if (e.result == false) {
             data.success = false; 
             data.message = e.message;
+            data.stack = e.stack;
+            data.errorName = 'FAIL';
+            
+            var line = e.stack[3];
+            var file = line.match(/.+\?path=(.+)$/)[1];
+            fileAndLine = file.split(':');
+            
+            data.line = fileAndLine[1];
+            data.file = fileAndLine[0].replace('%2F', '/');
+            
             return;
           }
         }
@@ -100,14 +110,18 @@ $spec.Spec = function(name, method) {
       return data;
     };
     
+    this.stack = function() {
+      return data.stack;
+    };
+    
     this.recover = function(exception) {
+      // TODO: replace this Mozilla-specific code with something cross-browser
       data.success = false;
       data.errorName = exception.name;
       data.message = exception.message;
-      data.fileName = exception.fileName;
-      data.lineNumber = exception.lineNumber;
+      data.file = exception.fileName;
+      data.line = exception.lineNumber;
       data.stack = exception.stack;
     };
 
 };
-
